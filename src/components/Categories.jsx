@@ -1,51 +1,26 @@
 import React, {useState} from 'react'
+import { useSelector } from "react-redux";
 
-/*class Categories extends React.Component {
-	state = {
-		activeItem: 3,
-	};
+export default function Categories({items, onClickItem}) {
 
-	onSelectItem = (index) => {
-		this.setState({
-			activeItem: index,
-		});
-	}
-
-	render() {
-	const {items} = this.props;
-	return(
-			<div className="categories">
-		<ul>
-			<li className="active">Все</li>
-			{
-				items.map((name, index) => (
-				<li className={this.state.activeItem === index ? 'active' : ''} onClick={() => this.onSelectItem(index)} key={name}>{name}</li>
-				))}
-		</ul>
-	</div>
-	);
-}}*/
-
-//export default Categories;
-
-
-
-
-export default function Categories({items, onClick}) {
-	const [activeItem, setActiveItem] = useState(0);
-
+	
+	const category = useSelector((state) => state.pizzas.catIndex);
+	
+	const [activeItem, setActiveItem] = useState(category);
 	const onSelectItem = (index) => {
 		setActiveItem(index);
+		onClickItem(index);
 	}
+
 	return (
 		<div>
 			<div className="categories">
 		<ul>
 		{items && 
 		items.map((name, index) => (
-			<li 
+			<li
 			className={activeItem === index ? 'active' : ''}
-			onClick={() => onSelectItem(index)} 
+			onClick={() => onSelectItem(index)}
 			key={name}>{name}
 			</li>
 				))}

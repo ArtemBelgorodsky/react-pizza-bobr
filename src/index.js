@@ -2,17 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './scss/app.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import {Provider} from 'react-redux'
 import App from './App';
-
+import store from "./redux/store"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<BrowserRouter>
-		<Routes>
-    <Route exact path="*" element={<App />} />
-		</Routes>
-		</BrowserRouter>
+		<Provider store={store}>
+			<Routes>
+    		<Route exact path="*" element={<App />} />
+			</Routes>
+		</Provider>
+	</BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

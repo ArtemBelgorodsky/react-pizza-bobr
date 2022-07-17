@@ -1,6 +1,9 @@
 import {React, useState, useEffect, useRef} from 'react'
+import { useDispatch } from 'react-redux';
+import { SetSort } from '../redux/pizzaSlice';
 
 export default function Popup({items}) {
+	const dispath = useDispatch();
 
 	const [visiblePopup, setvisiblePopup] = useState(false);
 	const [activeItem, setActiveItem] = useState(0);
@@ -12,6 +15,7 @@ export default function Popup({items}) {
 	const activeItemPopup = (index) => {
 		setActiveItem(index);
 		setvisiblePopup(false);
+		dispath(SetSort(index));
 	}
 
 	const activeName = items[activeItem];
